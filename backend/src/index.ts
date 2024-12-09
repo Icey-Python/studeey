@@ -5,8 +5,8 @@ import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import { Logger } from 'borgen'
 import { config } from './config/config'
-import connectDb from './db.connect'
 import router from './routes/router'
+import connectDb from './config/db.connect'
 
 
 
@@ -27,10 +27,10 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cookieParser())
 
-app.use('/', router)
 app.get('/ping', (_, res) => {
    res.send('pong')
 })
+app.use('/api', router)
 
 
 const StartServer = () => {

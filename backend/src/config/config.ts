@@ -13,5 +13,6 @@ export const config = {
     server: {
         PORT: SERVER_PORT
     },
+    JWT_SECRET: process.env.JWT_SECRET || '',
     origin: ORIGIN
 }
