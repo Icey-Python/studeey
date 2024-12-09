@@ -21,8 +21,6 @@ export default function CalendarScreen() {
         const calendars = await Calendar.getCalendarsAsync(
           Calendar.EntityTypes.EVENT,
         )
-        console.log('Here are all your calendars:')
-        console.log({ calendars })
       }
     })()
   }, [])

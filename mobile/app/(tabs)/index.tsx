@@ -1,5 +1,7 @@
 import { Text, View } from '@/components/Themed'
+import HomeHeader from '@/components/layout/home-header'
 import { Link, useRouter } from 'expo-router'
+import { StatusBar } from 'expo-status-bar'
 import { Pressable } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
@@ -20,11 +22,10 @@ export default function TabOneScreen() {
 
   return (
     <SafeAreaView className='flex-1'>
-      <View className='flex-1 bg-gray-100'>
-        <Text className='text-2xl font-bold text-center p-4 text-white w-full'>
-          ComBook
-        </Text>
-        <View className='flex-1 p-4 flex-wrap justify-center'>
+      <StatusBar style='auto' />
+      <View className='flex-1 p-4'>
+        <HomeHeader />
+        <View className='flex-1 flex-wrap justify-center'>
           {menuItems.map((item) => (
             <Pressable
               key={item.route}
