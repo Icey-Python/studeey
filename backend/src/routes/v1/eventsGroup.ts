@@ -1,12 +1,12 @@
-import { Router } from "express";
-import * as EventController from "../../controllers/events.controller";
+import { Router } from 'express'
+import * as EventController from '../../controllers/events.controller'
+import { userAuth } from '../../middleware/auth'
 
-const router = Router();
+const router = Router()
 
-router.get("/", EventController.getEvents);
-router.post("/", EventController.createEvent);
-router.put("/", EventController.updateEvent);
-router.delete("/", EventController.deleteEvent);
+router.get('/', userAuth, EventController.getEvents)
+router.post('/', userAuth, EventController.createEvent)
+router.put('/', userAuth, EventController.updateEvent)
+router.delete('/', userAuth, EventController.deleteEvent)
 
-
-export default router;
+export default router
