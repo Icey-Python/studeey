@@ -6,13 +6,9 @@ import User from '../models/user.model'
 import { signJwtToken } from '../utils/utils'
 import { IServerResponse } from '../types'
 
-
 // Create a user
 // @route POST /api/v1/user
-export const create = async (
-  req: Request,
-  res: Response<IServerResponse>,
-) => {
+export const create = async (req: Request, res: Response<IServerResponse>) => {
   try {
     let { name, email, password } = req.body
 
@@ -67,9 +63,9 @@ export const create = async (
     return res.status(HttpStatusCode.Created).json({
       status: 'success',
       message: 'Account created successfully',
-      data:{
+      data: {
         token: signedToken.data.token,
-        user: user
+        user: user,
       },
     })
   } catch (err) {
@@ -143,6 +139,53 @@ export const login = async (req: Request, res: Response<IServerResponse>) => {
     res.status(HttpStatusCode.InternalServerError).json({
       status: 'error',
       message: 'Error logging in user',
+      data: null,
+    })
+  }
+}
+
+// Get current user
+// @route GET /api/v1/user
+export const me = async (req: Request, res: Response<IServerResponse>) => {
+  try {
+    const userId = res.locals.user
+    const user = await User.findById(userId)
+    if (!user) {
+      return res.status(HttpStatusCode.NotFound).json({
+        status: 'error',
+        message: 'User not found',
+        data: null,
+      })
+    }
+    return res.status(HttpStatusCode.Ok).json({
+      status: 'success',
+      message: 'User retrieved successfully',
+      data: user,
+    })
+  } catch (err) {
+    Logger.error({ message: 'Error retrieving user: ' + err })
+    return res.status(HttpStatusCode.InternalServerError).json({
+      status: 'error',
+      message: 'Error retrieving user',
+      data: null,
+    })
+  }
+}
+
+// Logout a user
+// @route GET /api/v1/user/logout
+export const logout = async (req: Request, res: Response<IServerResponse>) => {
+  try {
+    return res.status(HttpStatusCode.Ok).json({
+      status: 'success',
+      message: 'User logged out successfully',
+      data: null,
+    })
+  } catch (err) {
+    Logger.error({ message: 'Error logging out user' + err })
+    return res.status(HttpStatusCode.InternalServerError).json({
+      status: 'error',
+      message: 'Error logging out user',
       data: null,
     })
   }

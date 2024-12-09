@@ -6,13 +6,49 @@ export const dummyNotes = [
     date: '2024-03-20',
   },
   {
+    title: 'Introdution to React Native',
+    summary:
+      'Basic concepts and components of React Native development. Includes setup instructions and best practices.',
+    date: '2024-03-20',
+  },
+  {
+    title: 'ntrodution to React Native',
+    summary:
+      'Basic concepts and components of React Native development. Includes setup instructions and best practices.',
+    date: '2024-03-20',
+  },
+  {
+    title: 'Inrodution to React Native',
+    summary:
+      'Basic concepts and components of React Native development. Includes setup instructions and best practices.',
+    date: '2024-03-20',
+  },
+  {
     title: 'JavaScript Fundamentals',
     summary:
       'Core concepts of JavaScript including closures, promises, and async/await patterns.',
     date: '2024-03-19',
   },
   {
-    title: 'UI Design Principles',
+    title: 'U Design Principles',
+    summary:
+      'Key principles of mobile UI design and best practices for creating intuitive user experiences.',
+    date: '2024-03-18',
+  },
+  {
+    title: 'I Design Principles',
+    summary:
+      'Key principles of mobile UI design and best practices for creating intuitive user experiences.',
+    date: '2024-03-18',
+  },
+  {
+    title: 'UI =esign Principles',
+    summary:
+      'Key principles of mobile UI design and best practices for creating intuitive user experiences.',
+    date: '2024-03-18',
+  },
+  {
+    title: 'UI Dsign Principles',
     summary:
       'Key principles of mobile UI design and best practices for creating intuitive user experiences.',
     date: '2024-03-18',

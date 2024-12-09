@@ -34,6 +34,12 @@
         {
           "calendarPermission": "The app needs to access your calendar."
         }
+      ],
+      [
+        "expo-document-picker",
+        {
+          "iCloudContainerEnvironment": "Production"
+        }
       ]
     ],
     "experiments": {
