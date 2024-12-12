@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { apiBase } from './user'
+import { Alert } from 'react-native'
 
 
 apiBase.interceptors.request.use(async (config) => {
@@ -9,12 +10,12 @@ apiBase.interceptors.request.use(async (config) => {
       config.headers.Authorization = `Bearer ${token}`
     }
     return config
-  } catch (error) {
-    console.error('Error retrieving token', error)
+  } catch (alert) {
+    console.error('Error retrieving token', alert)
     return config
   }
-}, (error) => {
-  return Promise.reject(error)
+}, (alert) => {
+  return Promise.reject(alert)
 })
 
 // Get Events
@@ -24,7 +25,7 @@ export const getEvents = async () => {
     const response = await apiBase.get('/events')
     return response.data
   } catch (err: any) {
-    toast.error(err.response?.data?.message || 'Failed to fetch events')
+    Alert.alert(err.response?.data?.message || 'Failed to fetch events')
     throw err
   }
 }
@@ -42,10 +43,10 @@ interface IEventData {
 export const createEvent = async (eventData: IEventData) => {
   try {
     const response = await apiBase.post('/events', eventData)
-    toast.success('Event created successfully')
+    Alert.alert('Event created successfully')
     return response.data
   } catch (err: any) {
-    toast.error(err.response?.data?.message || 'Failed to create event')
+    Alert.alert(err.response?.data?.message || 'Failed to create event')
     throw err
   }
 }
@@ -64,10 +65,10 @@ interface IEventUpdateData {
 export const updateEvent = async (eventData: IEventUpdateData) => {
   try {
     const response = await apiBase.put('/events', eventData)
-    toast.success('Event updated successfully')
+    Alert.alert('Event updated successfully')
     return response.data
   } catch (err: any) {
-    toast.error(err.response?.data?.message || 'Failed to update event')
+    Alert.alert(err.response?.data?.message || 'Failed to update event')
     throw err
   }
 }
@@ -79,10 +80,10 @@ export const deleteEvent = async (eventId: string) => {
     const response = await apiBase.delete('/events', {
       data: { id: eventId },
     })
-    toast.success('Event deleted successfully')
+    Alert.alert('Event deleted successfully')
     return response.data
   } catch (err: any) {
-    toast.error(err.response?.data?.message || 'Failed to delete event')
+    Alert.alert(err.response?.data?.message || 'Failed to delete event')
     throw err
   }
 }

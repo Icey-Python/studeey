@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { apiBase } from './user'
+import { Alert } from 'react-native'
 
 apiBase.interceptors.request.use(async (config) => {
   try {
@@ -8,12 +9,12 @@ apiBase.interceptors.request.use(async (config) => {
       config.headers.Authorization = `Bearer ${token}`
     }
     return config
-  } catch (error) {
-    console.error('Error retrieving token', error)
+  } catch (alert) {
+    console.error('Error retrieving token', alert)
     return config
   }
-}, (error) => {
-  return Promise.reject(error)
+}, (alert) => {
+  return Promise.reject(alert)
 })
 
 interface IUploadNote {
@@ -42,7 +43,7 @@ export const uploadNote = async (noteData: IUploadNote) => {
 
     return response.data
   } catch (err: any) {
-    toast.error(err.response?.data?.message || 'Failed to upload note')
+    Alert.alert(err.response?.data?.message || 'Failed to upload note')
   }
 }
 
@@ -54,10 +55,10 @@ interface IOCRNote {
 export const ocrNote = async (data: IOCRNote) => {
   try {
     const response = await apiBase.post('/notes/ocr', data)
-    toast.success('OCR completed successfully')
+    Alert.alert('OCR completed successfully')
     return response.data
   } catch (err: any) {
-    toast.error(err.response?.data?.message || 'Failed to perform OCR')
+    Alert.alert(err.response?.data?.message || 'Failed to perform OCR')
   }
 }
 
@@ -71,10 +72,10 @@ interface IShareNote {
 export const shareNote = async (data: IShareNote) => {
   try {
     const response = await apiBase.post('/notes/share', data)
-    toast.success('Note shared successfully')
+    Alert.alert('Note shared successfully')
     return response.data
   } catch (err: any) {
-    toast.error(err.response?.data?.message || 'Failed to share note')
+    Alert.alert(err.response?.data?.message || 'Failed to share note')
   }
 }
 
@@ -91,7 +92,7 @@ export const getAllNotes = async (params: IGetAllNotes) => {
     )
     return response.data
   } catch (err: any) {
-    toast.error(err.response?.data?.message || 'Failed to fetch notes')
+    Alert.alert(err.response?.data?.message || 'Failed to fetch notes')
   }
 }
 
@@ -105,7 +106,7 @@ export const getNote = async (params: IGetNote) => {
     const response = await apiBase.get(`/notes?id=${params.id}`)
     return response.data
   } catch (err: any) {
-    toast.error(err.response?.data?.message || 'Failed to fetch note')
+    Alert.alert(err.response?.data?.message || 'Failed to fetch note')
   }
 }
 
@@ -119,7 +120,7 @@ export const searchNotes = async (params: ISearchNotes) => {
     const response = await apiBase.get(`/notes/search?query=${params.query}`)
     return response.data
   } catch (err: any) {
-    toast.error(err.response?.data?.message || 'Failed to search notes')
+    Alert.alert(err.response?.data?.message || 'Failed to search notes')
   }
 }
 
@@ -135,7 +136,7 @@ export const filterNotesByTags = async (data: IFilterNotesByTags) => {
     )
     return response.data
   } catch (err: any) {
-    toast.error(err.response?.data?.message || 'Failed to filter notes')
+    Alert.alert(err.response?.data?.message || 'Failed to filter notes')
   }
 }
 
@@ -146,7 +147,7 @@ export const getSharedNotes = async () => {
     const response = await apiBase.get('/notes/shared')
     return response.data
   } catch (err: any) {
-    toast.error(err.response?.data?.message || 'Failed to fetch shared notes')
+    Alert.alert(err.response?.data?.message || 'Failed to fetch shared notes')
   }
 }
 
@@ -161,10 +162,10 @@ interface IUpdateNote {
 export const updateNote = async (data: IUpdateNote) => {
   try {
     const response = await apiBase.put('/notes', data)
-    toast.success('Note updated successfully')
+    Alert.alert('Note updated successfully')
     return response.data
   } catch (err: any) {
-    toast.error(err.response?.data?.message || 'Failed to update note')
+    Alert.alert(err.response?.data?.message || 'Failed to update note')
   }
 }
 
@@ -176,9 +177,9 @@ interface IDeleteNote {
 export const deleteNote = async (data: IDeleteNote) => {
   try {
     const response = await apiBase.delete('/notes', { data })
-    toast.success('Note deleted successfully')
+    Alert.alert('Note deleted successfully')
     return response.data
   } catch (err: any) {
-    toast.error(err.response?.data?.message || 'Failed to delete note')
+    Alert.alert(err.response?.data?.message || 'Failed to delete note')
   }
 }

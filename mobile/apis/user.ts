@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { SERVER_URL } from '@/config/config'
 import axios from 'axios'
+import { Alert } from 'react-native'
 
 export const apiBase = axios.create({
 	baseURL: `${SERVER_URL}/api/v1`,
@@ -20,7 +21,7 @@ export const createUser = async (data: ICreateUser) => {
     await AsyncStorage.setItem('userToken', response.data.token)
     return response.data
   } catch (err: any) {
-    toast.error(err.response?.data?.message || 'Failed to create user')
+    Alert.alert(err.response?.data?.message || 'Failed to create user')
   }
 }
 
@@ -36,7 +37,7 @@ export const login = async (data: ILogin) => {
     await AsyncStorage.setItem('userToken', response.data.token)
     return response.data
   } catch (err: any) {
-    toast.error(err.response?.data?.message || 'Failed to login')
+    Alert.alert(err.response?.data?.message || 'Failed to login')
   }
 }
 
@@ -47,7 +48,7 @@ export const getUser = async () => {
     const response = await apiBase.get('/user')
     return response.data
   } catch (err: any) {
-    toast.error(err.response?.data?.message || 'Failed to get user')
+    Alert.alert(err.response?.data?.message || 'Failed to get user')
   }
 }
 
@@ -61,7 +62,7 @@ export const logout = async () => {
     // Remove token from AsyncStorage
     await AsyncStorage.removeItem('userToken')
   } catch (err: any) {
-    toast.error(err.response?.data?.message || 'Logout failed')
+    Alert.alert(err.response?.data?.message || 'Logout failed')
     throw err
   }
 }
