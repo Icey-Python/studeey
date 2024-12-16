@@ -1,7 +1,8 @@
 import { GoogleGenerativeAI } from '@google/generative-ai'
 import fs from 'fs'
 import path from 'path'
-const genAI = new GoogleGenerativeAI('AIzaSyAC5Ae03ZAxUiH-_cEHNjcvZ1HaWi-93Nc')
+import { config } from '../config/config'
+const genAI = new GoogleGenerativeAI(config.generativeAI.API_KEY)
 
 interface ChatHistory {
   role: string
