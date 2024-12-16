@@ -8,8 +8,6 @@ import { config } from './config/config'
 import router from './routes/router'
 import connectDb from './config/db.connect'
 
-
-
 const app: Application = express()
 const PORT = config.server.PORT || 3000
 
@@ -31,7 +29,6 @@ app.get('/ping', (_, res) => {
    res.send('pong')
 })
 app.use('/api', router)
-
 
 const StartServer = () => {
   app.listen(PORT, () => {
