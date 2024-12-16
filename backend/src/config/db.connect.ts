@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { Logger } from "borgen";
-import { config } from "./config/config";
+import { config } from "./config";
 
 mongoose.set("strictQuery", true);
 
